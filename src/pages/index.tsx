@@ -8,22 +8,30 @@ import PickupArticle from '../components/pickup-article'
 
 export default function Home(props) {
   return (
+    // importしたMainLayoutを表示（HeaderとMain）
     <MainLayout>
+      {/* Head要素 */}
       <Head>
         <title>Simple News</title>
       </Head>
+      {/* Main要素の中の大枠 */}
       <div className={styles.contents}>
+        {/* NavComponent */}
         <div className={styles.nav}>
           <nav>
             <Nav />
           </nav>
         </div>
         <div className={styles.blank} />
+        {/* ArticleComponent */}
         <div className={styles.main}>
           <Article title="headline" articles={props.topArticles} />
         </div>
+        {/* SidebarComponent */}
         <div className={styles.aside}>
+          {/* 天気予報 */}
           <WeatherNews weatherNews={props.weatherNews} />
+          {/* ピックアップ */}
           <PickupArticle articles={props.pickupArticles} />
         </div>
       </div>
@@ -31,6 +39,8 @@ export default function Home(props) {
   );
 }
 
+
+// ”getStaticProps”でビルド時に外部からのデータなどを事前にフェッチする（async await を使った非同期処理）
 export const getStaticProps = async () => {
   // NewsAPIのトップ記事の情報を取得
   const pageSize = 10  //取得する記事の数
